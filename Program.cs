@@ -5,7 +5,7 @@
 using System;
 using System.Collections;
 
-class Day1
+class AdventOfCode
 {
     class Elf
     {
@@ -41,17 +41,35 @@ class Day1
         }
     }
 
+    enum RockPaperScissorsPoints
+    {
+        Rock = 1,
+        Paper = 2,
+        Scissors = 3,
+        Loss = 0,
+        Draw = 3,
+        Win = 6
+    }
+
     static void Main()
     {
-        string path = @"C:\Users\StefanoSavarino\source\repos\AdventOfCode\2022-12-01 input\2022-12-01 input";
+
+        //Day1();
+        Day2();
+        
+    }
+
+    static void Day1()
+    {
+        string day1Path = @"C:\Users\StefanoSavarino\source\repos\AdventOfCode\2022-12-01 input\2022-12-01 input";
         List<Elf> elfs = new List<Elf>();
 
         int counter = 0;
         int highestCalories = 0;
         int top3Calories = 0;
         elfs.Add(new Elf(counter));
-        
-        foreach(string line in System.IO.File.ReadLines(path))
+
+        foreach (string line in System.IO.File.ReadLines(day1Path))
         {
             if (line == "")
             {
@@ -74,13 +92,79 @@ class Day1
 
         List<Elf> sortedElfs = elfs.OrderBy(el => el.GetTotalCalories()).ToList();
 
-        for(int i = 0; i < 3; i++)
+        for (int i = 0; i < 3; i++)
         {
             top3Calories += sortedElfs[counter].GetTotalCalories();
             counter--;
         }
         // Printout answer part#2
         Console.WriteLine("Total calories top3 elves: " + top3Calories);
-        
+    }
+
+    static void Day2()
+    {
+        string day2Path = @"C:\Users\StefanoSavarino\source\repos\AdventOfCode\2022-12-02 input\input.txt";
+        int counter = 0;
+        int totalPoints = 0;
+
+        foreach(string line in System.IO.File.ReadLines(day2Path))
+        {
+            int first, second;
+            string [] round = line.Split(new[] {' '});
+            // Console.WriteLine("Round " + counter + " - elf: " + round[0] + ", you: " + round[1]);
+            counter++;
+
+            if (round[0] == "A")
+            {
+                if (round[1] == "X")
+                {
+                    totalPoints += (int) RockPaperScissorsPoints.Draw;
+                    totalPoints += (int) RockPaperScissorsPoints.Rock;
+                } else if (round[1] == "Y")
+                {
+                    totalPoints += (int) RockPaperScissorsPoints.Win;
+                    totalPoints += (int) RockPaperScissorsPoints.Paper;
+                } else if (round[1] == "Z")
+                {
+                    totalPoints += (int) RockPaperScissorsPoints.Loss;
+                    totalPoints += (int) RockPaperScissorsPoints.Scissors;
+                }
+            } else if (round[0] == "B")
+            {
+                if (round[1] == "X")
+                {
+                    totalPoints += (int)RockPaperScissorsPoints.Loss;
+                    totalPoints += (int)RockPaperScissorsPoints.Rock;
+                }
+                else if (round[1] == "Y")
+                {
+                    totalPoints += (int)RockPaperScissorsPoints.Draw;
+                    totalPoints += (int)RockPaperScissorsPoints.Paper;
+                }
+                else if (round[1] == "Z")
+                {
+                    totalPoints += (int)RockPaperScissorsPoints.Win;
+                    totalPoints += (int)RockPaperScissorsPoints.Scissors;
+                }
+            } else if (round[0] == "C")
+            {
+                if (round[1] == "X")
+                {
+                    totalPoints += (int)RockPaperScissorsPoints.Win;
+                    totalPoints += (int)RockPaperScissorsPoints.Rock;
+                }
+                else if (round[1] == "Y")
+                {
+                    totalPoints += (int)RockPaperScissorsPoints.Loss;
+                    totalPoints += (int)RockPaperScissorsPoints.Paper;
+                }
+                else if (round[1] == "Z")
+                {
+                    totalPoints += (int)RockPaperScissorsPoints.Draw;
+                    totalPoints += (int)RockPaperScissorsPoints.Scissors;
+                }
+            }
+        }
+        Console.WriteLine("Final result: " + totalPoints);
     }
 }
