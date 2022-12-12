@@ -47,33 +47,40 @@ class Day1
         List<Elf> elfs = new List<Elf>();
 
         int counter = 0;
-        int highest_calories = 0;
+        int highestCalories = 0;
+        int top3Calories = 0;
         elfs.Add(new Elf(counter));
         
         foreach(string line in System.IO.File.ReadLines(path))
         {
             if (line == "")
             {
-                Console.WriteLine("Old Elf total calories: " + elfs[counter].GetTotalCalories());
                 counter++;
                 elfs.Add(new Elf(counter));
-                Console.WriteLine("counter = " + counter);
             }
             else
             {
                 elfs[counter].AddItemCalories(Int32.Parse(line));
-                Console.WriteLine(line);
             }
         }
-        
-        foreach(Elf el in elfs)
+
+        foreach (Elf el in elfs)
         {
-            if(el.GetTotalCalories() > highest_calories)
-                highest_calories = el.GetTotalCalories();
-            Console.WriteLine("Current highest calories count: " + highest_calories);
+            if (el.GetTotalCalories() > highestCalories)
+                highestCalories = el.GetTotalCalories();
         }
+        // Printout answer part#1
+        Console.WriteLine("Highest calories count: " + highestCalories);
 
-        Console.WriteLine("highest calories = " + highest_calories);
+        List<Elf> sortedElfs = elfs.OrderBy(el => el.GetTotalCalories()).ToList();
 
+        for(int i = 0; i < 3; i++)
+        {
+            top3Calories += sortedElfs[counter].GetTotalCalories();
+            counter--;
+        }
+        // Printout answer part#2
+        Console.WriteLine("Total calories top3 elves: " + top3Calories);
+        
     }
 }
