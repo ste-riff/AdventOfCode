@@ -105,66 +105,95 @@ class AdventOfCode
     {
         string day2Path = @"C:\Users\StefanoSavarino\source\repos\AdventOfCode\2022-12-02 input\input.txt";
         int counter = 0;
-        int totalPoints = 0;
+        int totalPointsPart1 = 0;
+        int totalPointsPart2 = 0;
 
         foreach(string line in System.IO.File.ReadLines(day2Path))
         {
             int first, second;
             string [] round = line.Split(new[] {' '});
-            // Console.WriteLine("Round " + counter + " - elf: " + round[0] + ", you: " + round[1]);
             counter++;
 
             if (round[0] == "A")
             {
                 if (round[1] == "X")
                 {
-                    totalPoints += (int) RockPaperScissorsPoints.Draw;
-                    totalPoints += (int) RockPaperScissorsPoints.Rock;
+                    totalPointsPart1 += (int) RockPaperScissorsPoints.Draw;
+                    totalPointsPart1 += (int) RockPaperScissorsPoints.Rock;
+
+                    totalPointsPart2 += (int) RockPaperScissorsPoints.Loss;
+                    totalPointsPart2 += (int)RockPaperScissorsPoints.Scissors;
                 } else if (round[1] == "Y")
                 {
-                    totalPoints += (int) RockPaperScissorsPoints.Win;
-                    totalPoints += (int) RockPaperScissorsPoints.Paper;
+                    totalPointsPart1 += (int) RockPaperScissorsPoints.Win;
+                    totalPointsPart1 += (int) RockPaperScissorsPoints.Paper;
+
+                    totalPointsPart2 += (int)RockPaperScissorsPoints.Draw;
+                    totalPointsPart2 += (int)RockPaperScissorsPoints.Rock;
                 } else if (round[1] == "Z")
                 {
-                    totalPoints += (int) RockPaperScissorsPoints.Loss;
-                    totalPoints += (int) RockPaperScissorsPoints.Scissors;
+                    totalPointsPart1 += (int) RockPaperScissorsPoints.Loss;
+                    totalPointsPart1 += (int) RockPaperScissorsPoints.Scissors;
+
+                    totalPointsPart2 += (int)RockPaperScissorsPoints.Win;
+                    totalPointsPart2 += (int)RockPaperScissorsPoints.Paper;
                 }
             } else if (round[0] == "B")
             {
                 if (round[1] == "X")
                 {
-                    totalPoints += (int)RockPaperScissorsPoints.Loss;
-                    totalPoints += (int)RockPaperScissorsPoints.Rock;
+                    totalPointsPart1 += (int)RockPaperScissorsPoints.Loss;
+                    totalPointsPart1 += (int)RockPaperScissorsPoints.Rock;
+
+                    totalPointsPart2 += (int)RockPaperScissorsPoints.Loss;
+                    totalPointsPart2 += (int)RockPaperScissorsPoints.Rock;
                 }
                 else if (round[1] == "Y")
                 {
-                    totalPoints += (int)RockPaperScissorsPoints.Draw;
-                    totalPoints += (int)RockPaperScissorsPoints.Paper;
+                    totalPointsPart1 += (int)RockPaperScissorsPoints.Draw;
+                    totalPointsPart1 += (int)RockPaperScissorsPoints.Paper;
+
+                    totalPointsPart2 += (int)RockPaperScissorsPoints.Draw;
+                    totalPointsPart2 += (int)RockPaperScissorsPoints.Paper;
                 }
                 else if (round[1] == "Z")
                 {
-                    totalPoints += (int)RockPaperScissorsPoints.Win;
-                    totalPoints += (int)RockPaperScissorsPoints.Scissors;
+                    totalPointsPart1 += (int)RockPaperScissorsPoints.Win;
+                    totalPointsPart1 += (int)RockPaperScissorsPoints.Scissors;
+
+                    totalPointsPart2 += (int)RockPaperScissorsPoints.Win;
+                    totalPointsPart2 += (int)RockPaperScissorsPoints.Scissors;
                 }
             } else if (round[0] == "C")
             {
                 if (round[1] == "X")
                 {
-                    totalPoints += (int)RockPaperScissorsPoints.Win;
-                    totalPoints += (int)RockPaperScissorsPoints.Rock;
+                    totalPointsPart1 += (int)RockPaperScissorsPoints.Win;
+                    totalPointsPart1 += (int)RockPaperScissorsPoints.Rock;
+
+                    totalPointsPart2 += (int)RockPaperScissorsPoints.Loss;
+                    totalPointsPart2 += (int)RockPaperScissorsPoints.Paper;
                 }
                 else if (round[1] == "Y")
                 {
-                    totalPoints += (int)RockPaperScissorsPoints.Loss;
-                    totalPoints += (int)RockPaperScissorsPoints.Paper;
+                    totalPointsPart1 += (int)RockPaperScissorsPoints.Loss;
+                    totalPointsPart1 += (int)RockPaperScissorsPoints.Paper;
+
+                    totalPointsPart2 += (int)RockPaperScissorsPoints.Draw;
+                    totalPointsPart2 += (int)RockPaperScissorsPoints.Scissors;
                 }
                 else if (round[1] == "Z")
                 {
-                    totalPoints += (int)RockPaperScissorsPoints.Draw;
-                    totalPoints += (int)RockPaperScissorsPoints.Scissors;
+                    totalPointsPart1 += (int)RockPaperScissorsPoints.Draw;
+                    totalPointsPart1 += (int)RockPaperScissorsPoints.Scissors;
+
+                    totalPointsPart2 += (int)RockPaperScissorsPoints.Win;
+                    totalPointsPart2 += (int)RockPaperScissorsPoints.Rock;
                 }
             }
         }
-        Console.WriteLine("Final result: " + totalPoints);
+        Console.WriteLine("Final result totalPointsPart1: " + totalPointsPart1);
+        Console.WriteLine("Final result totalPointsPart2: " + totalPointsPart2);
+
     }
 }
